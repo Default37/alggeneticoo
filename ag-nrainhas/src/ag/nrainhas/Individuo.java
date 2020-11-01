@@ -3,6 +3,7 @@ package ag.nrainhas;
 import java.util.Arrays;
 import java.util.Random;
 
+
 /**
  * Um indivíduo que representa um estado final do tabuleiro (todas as rainhas posicionadas)
  *
@@ -61,21 +62,8 @@ public class Individuo {
      * @param aptidaoMax valor máximo de não-colisões para determinado tamanho de tabuleiro
      */
     private void calcAptidao(int aptidaoMax) {
-        int colisoes = 0;
-        for (int i = 0; i < (getGenotipo().length - 1); i++) { //para cada rainha
-            int passo = 1;
-            for (int j = (i + 1); j < getGenotipo().length; j++) { // para cada rainha à esquerda da rainha atual
-                if (getGenotipo()[j] == getGenotipo()[i]) { //colisão na linha
-                    colisoes++;
-                } else if (getGenotipo()[j] == getGenotipo()[i] + passo) { //colisão na diagonal superior
-                    colisoes++;
-                } else if (getGenotipo()[j] == getGenotipo()[i] - passo) { //colisão na diagonal inferior
-                    colisoes++;
-                }
-                passo++;
-            }
-        }
-        aptidao = aptidaoMax - colisoes;
+        
+        aptidao = getGenotipo().length - 1;
     }
 
     /**
@@ -101,17 +89,17 @@ public class Individuo {
 
     public void exibeIndividuo() {
         int[][] m = new int[getGenotipo().length][getGenotipo().length];
-        System.out.print("GenÃ³tipo: ");
+        System.out.print("Genótipo: ");
         for (int i = 0; i < getGenotipo().length; i++) {
             m[getGenotipo()[i]][i] = 1;
             System.out.print(getGenotipo()[i] + " ");
         }
-        System.out.println("\nFenÃ³tipo: ");
+        System.out.println("\nFenótipo: ");
         for (int[] linha : m) {
             System.out.println(Arrays.toString(linha));
         }
 
-        System.out.println("AptidÃ£o = " + getAptidao());
+        System.out.println("Aptidão = " + getAptidao());
     }
 
     public int getAptidao() {

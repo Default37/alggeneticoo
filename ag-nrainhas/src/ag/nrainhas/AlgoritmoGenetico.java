@@ -36,12 +36,7 @@ public class AlgoritmoGenetico {
      * @param tamTabuleiro o tamanho do tabuleiro
      */
     private void calculaAptidaoMax(int tamTabuleiro) {
-        aptidaoMaxIndivido = 0;
-        int aux = tamTabuleiro - 1;
-
-        for (int i = 0; i < (tamTabuleiro - 1); i++) {
-            aptidaoMaxIndivido += aux--;
-        }
+        aptidaoMaxIndivido = 1;
     }
 
     /**
@@ -153,7 +148,7 @@ public class AlgoritmoGenetico {
         ordenaPopulacao(novaPopulacao);
 
         //se a nova população for maior que a original, remove o(s) mais inapto(s)
-        while (novaPopulacao.size() > populacao.size()) {
+        while (novaPopulacao.size() < populacao.size()) {
             novaPopulacao.remove(novaPopulacao.size() - 1);
         }
 
