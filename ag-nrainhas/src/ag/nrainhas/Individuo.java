@@ -3,7 +3,6 @@ package ag.nrainhas;
 import java.util.Arrays;
 import java.util.Random;
 
-
 /**
  * Um indivíduo que representa um estado final do tabuleiro (todas as rainhas posicionadas)
  *
@@ -24,7 +23,7 @@ public class Individuo {
      * @param aptidaoMax valor máximo de não-colisões para determinado tamanho de tabuleiro
      */
     public Individuo(int n, int aptidaoMax, int[][] grafo) {
-        this.aptidao = 0;
+        aptidao = 0;
         genotipo = new int[n];
         geraGenotipoAleatorio();
         calcAptidao(grafo);
@@ -39,6 +38,7 @@ public class Individuo {
      * @param corteCrossover onde fazer o corte para mistura de genótipos
      */
     public Individuo(int[] pai, int[] mae, int aptidaoMax, int corteCrossover, int[][] grafo) {
+        aptidao = 0;
         genotipo = new int[pai.length];
         crossOver(pai, mae, corteCrossover);
         calcAptidao(grafo);
@@ -96,11 +96,18 @@ public class Individuo {
         genotipo[r.nextInt(genotipo.length)] = r.nextInt(genotipo.length);
     }
 
-    public void exibeIndividuo() {
+    public void exibeIndividuo(int[][] grafo) {
         int[][] m = new int[getGenotipo().length][getGenotipo().length];
+        
+        for (int[] m1 : m) {
+            for (int j = 0; j < m1.length; j++) {
+                m1[j] = -1; // conferir se ta certo
+            }
+        }
+        
         System.out.print("Genótipo: ");
         for (int i = 0; i < getGenotipo().length; i++) {
-            m[getGenotipo()[i]][i] = 1;
+            m[i][getGenotipo()[i]] = grafo[i][getGenotipo()[i]];
             System.out.print(getGenotipo()[i] + " ");
         }
         System.out.println("\nFenótipo: ");
