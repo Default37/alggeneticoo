@@ -23,10 +23,11 @@ public class Individuo {
      * @param n tamanho do genótipo
      * @param aptidaoMax valor máximo de não-colisões para determinado tamanho de tabuleiro
      */
-    public Individuo(int n, int aptidaoMax) {
+    public Individuo(int n, int aptidaoMax, int[][] grafo) {
+        this.aptidao = 0;
         genotipo = new int[n];
         geraGenotipoAleatorio();
-        calcAptidao(aptidaoMax);
+        calcAptidao(grafo);
     }
 
     /**
@@ -37,10 +38,10 @@ public class Individuo {
      * @param aptidaoMax valor máximo de não-colisões para determinado tamanho de tabuleiro
      * @param corteCrossover onde fazer o corte para mistura de genótipos
      */
-    public Individuo(int[] pai, int[] mae, int aptidaoMax, int corteCrossover) {
+    public Individuo(int[] pai, int[] mae, int aptidaoMax, int corteCrossover, int[][] grafo) {
         genotipo = new int[pai.length];
         crossOver(pai, mae, corteCrossover);
-        calcAptidao(aptidaoMax);
+        calcAptidao(grafo);
     }
 
     /**
@@ -61,9 +62,17 @@ public class Individuo {
      *
      * @param aptidaoMax valor máximo de não-colisões para determinado tamanho de tabuleiro
      */
-    private void calcAptidao(int aptidaoMax) {
+    private void calcAptidao(int[][] grafo) {
         
-        aptidao = getGenotipo().length - 1;
+        for (int i = 0; i < getGenotipo().length; i++){
+            
+            if (grafo[i][getGenotipo()[i]] == 0){
+                i = getGenotipo().length;
+                aptidao = Integer.MAX_VALUE;
+            } else {
+                aptidao += grafo[i][getGenotipo()[i]];
+            }
+        }
     }
 
     /**
