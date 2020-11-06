@@ -64,14 +64,29 @@ public class Individuo {
      */
     private void calcAptidao(int[][] grafo) {
         
+        int custoTotalGrafo = 0;
+        int aux = 0;
+        boolean flag = true;
+        
+        for (int i = 0; i < grafo.length; i++){
+            for (int j = 0; j < grafo[i].length; j++){
+                custoTotalGrafo += grafo[i][j];
+            }
+        }
+        
         for (int i = 0; i < getGenotipo().length; i++){
             
             if (grafo[i][getGenotipo()[i]] == 0){
                 i = getGenotipo().length;
-                aptidao = 99;
+                aptidao = Integer.MIN_VALUE;
+                flag = false;
             } else {
-                aptidao += grafo[i][getGenotipo()[i]];
+                aux += grafo[i][getGenotipo()[i]];
             }
+        }
+        
+        if (flag){
+            aptidao = custoTotalGrafo - aux;
         }
     }
 

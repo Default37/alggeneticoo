@@ -19,24 +19,32 @@ public class AlgoritmoGenetico {
     /**
      * Constrói um algoritmo genético.
      *
-     * @param tamTabuleiro o tamanho do tabuleiro n x n
+     * @param tamGrafo o tamanho do tabuleiro n x n
      * @param tamPopulacao o número de indivíduos
      */
-    public AlgoritmoGenetico(int tamTabuleiro, int tamPopulacao, int[][] grafo) {
+    public AlgoritmoGenetico(int tamGrafo, int tamPopulacao, int[][] grafo) {
         this.tamPopulacao = tamPopulacao;
         populacao = new ArrayList<>();
-        calculaAptidaoMax(tamTabuleiro);
-        geraPopulacaoInicial(tamTabuleiro, grafo);
+        calculaAptidaoMax(grafo);
+        geraPopulacaoInicial(tamGrafo, grafo);
     }
 
     /**
      * Calcula a aptidão máxima que um indivíduo pode atingir. Para cada rainha, o numero máximo de
      * não-colisões que ela pode ter é baseado no número de rainhas a sua direita.
      *
-     * @param tamTabuleiro o tamanho do tabuleiro
+     * @param grafo
      */
-    private void calculaAptidaoMax(int tamTabuleiro) {
-        aptidaoMaxIndivido = 1;
+    private void calculaAptidaoMax(int[][] grafo) {
+        
+        int custoTotalGrafo = 0;
+        
+        for (int i = 0; i < grafo.length; i++){
+            for (int j = 0; j < grafo[i].length; j++){
+                custoTotalGrafo += grafo[i][j];
+            }
+        }
+        aptidaoMaxIndivido = custoTotalGrafo - 1;
     }
 
     /**
@@ -148,7 +156,7 @@ public class AlgoritmoGenetico {
         ordenaPopulacao(novaPopulacao);
 
         //se a nova população for maior que a original, remove o(s) mais inapto(s)
-        while (novaPopulacao.size() < populacao.size()) {
+        while (novaPopulacao.size() > populacao.size()) {
             novaPopulacao.remove(novaPopulacao.size() - 1);
         }
 
