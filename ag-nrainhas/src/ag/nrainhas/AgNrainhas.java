@@ -38,8 +38,8 @@ public class AgNrainhas {
             }
         }
 
-        AlgoritmoGenetico ag = new AlgoritmoGenetico(ngrafo, npop); //instancia
-        ag.executa(ngen, ncross, taxa, "roleta", 1); //executa
+        AlgoritmoGenetico ag = new AlgoritmoGenetico(ngrafo, npop, comp); //instancia
+        ag.executa(ngen, ncross, taxa, "torneio", 1, comp); //executa
     }
     
 }

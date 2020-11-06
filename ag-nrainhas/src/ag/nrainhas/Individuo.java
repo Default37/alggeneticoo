@@ -68,7 +68,7 @@ public class Individuo {
             
             if (grafo[i][getGenotipo()[i]] == 0){
                 i = getGenotipo().length;
-                aptidao = Integer.MAX_VALUE;
+                aptidao = 99;
             } else {
                 aptidao += grafo[i][getGenotipo()[i]];
             }
@@ -101,7 +101,7 @@ public class Individuo {
         
         for (int[] m1 : m) {
             for (int j = 0; j < m1.length; j++) {
-                m1[j] = -1; // conferir se ta certo
+                m1[j] = 0; // conferir se ta certo
             }
         }
         

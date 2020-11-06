@@ -22,11 +22,11 @@ public class AlgoritmoGenetico {
      * @param tamTabuleiro o tamanho do tabuleiro n x n
      * @param tamPopulacao o número de indivíduos
      */
-    public AlgoritmoGenetico(int tamTabuleiro, int tamPopulacao) {
+    public AlgoritmoGenetico(int tamTabuleiro, int tamPopulacao, int[][] grafo) {
         this.tamPopulacao = tamPopulacao;
         populacao = new ArrayList<>();
         calculaAptidaoMax(tamTabuleiro);
-        geraPopulacaoInicial(tamTabuleiro);
+        geraPopulacaoInicial(tamTabuleiro, grafo);
     }
 
     /**
@@ -69,10 +69,10 @@ public class AlgoritmoGenetico {
      *
      * @param tamTabuleiro o tamanho do tabuleiro n x n
      */
-    private void geraPopulacaoInicial(int tamTabuleiro) {
+    private void geraPopulacaoInicial(int tamTabuleiro, int[][] grafo) {
 
         for (int i = 0; i < tamPopulacao; i++) {
-            populacao.add(new Individuo(tamTabuleiro, aptidaoMaxIndivido));
+            populacao.add(new Individuo(tamTabuleiro, aptidaoMaxIndivido, grafo));
         }
         ordenaPopulacao(populacao);
         calculaAptidaoTotal();
@@ -87,18 +87,18 @@ public class AlgoritmoGenetico {
      * @param metodo método de seleção de indivíduos para crossover -> "roleta" ou "torneio"
      * @param elitismo quantos elementos serão movidos para a próxima geração através do elitismo
      */
-    public void executa(int nGeracoes, int corteCrossover, int taxaMutacao, String metodo, int elitismo) {
+    public void executa(int nGeracoes, int corteCrossover, int taxaMutacao, String metodo, int elitismo, int[][] grafo) {
         int i = 0;
         while (i < nGeracoes && populacao.get(0).getAptidao() != aptidaoMaxIndivido) {
             System.out.println("Geração " + i + "\nTamanho população: " + populacao.size() + "\nAptidão média:" + (aptidaoTotal / populacao.size()));
             System.out.println("Melhor indivíduo: ");
-            populacao.get(0).exibeIndividuo();
+            populacao.get(0).exibeIndividuo(grafo);
             System.out.println("--------------------------------\n");
-            geraNovaPopulacao(corteCrossover, taxaMutacao, metodo, elitismo);
+            geraNovaPopulacao(corteCrossover, taxaMutacao, metodo, elitismo, grafo);
             i++;
         }
         System.out.println("Solução vencedora: ");
-        populacao.get(0).exibeIndividuo();
+        populacao.get(0).exibeIndividuo(grafo);
     }
 
     /**
@@ -109,7 +109,7 @@ public class AlgoritmoGenetico {
      * @param metodo método de seleção de indivíduos para crossover -> "roleta" ou "torneio"
      * @param elitismo quantos elementos serão movidos para a próxima geração através do elitismo
      */
-    private void geraNovaPopulacao(int corteCrossover, int taxaMutacao, String metodo, int elitismo) {
+    private void geraNovaPopulacao(int corteCrossover, int taxaMutacao, String metodo, int elitismo, int[][] grafo) {
         ArrayList<Individuo> novaPopulacao = new ArrayList<>();
         Random r = new Random();
 
@@ -136,11 +136,11 @@ public class AlgoritmoGenetico {
             }
 
             //cria dois novos indivíduos, e efetua mutação caso necessário
-            novaPopulacao.add(new Individuo(i1.getGenotipo(), i2.getGenotipo(), aptidaoMaxIndivido, corteCrossover));
+            novaPopulacao.add(new Individuo(i1.getGenotipo(), i2.getGenotipo(), aptidaoMaxIndivido, corteCrossover, grafo));
             if (r.nextInt(100) < taxaMutacao) {
                 novaPopulacao.get(novaPopulacao.size() - 1).muta();
             }
-            novaPopulacao.add(new Individuo(i2.getGenotipo(), i1.getGenotipo(), aptidaoMaxIndivido, corteCrossover));
+            novaPopulacao.add(new Individuo(i2.getGenotipo(), i1.getGenotipo(), aptidaoMaxIndivido, corteCrossover, grafo));
             if (r.nextInt(100) < taxaMutacao) {
                 novaPopulacao.get(novaPopulacao.size() - 1).muta();
             }
@@ -190,7 +190,7 @@ public class AlgoritmoGenetico {
         int j = r.nextInt(populacao.size());
 
         //escolhe qual é o maior e o retorna
-        if (populacao.get(i).getAptidao() >= populacao.get(j).getAptidao()) {
+        if (populacao.get(i).getAptidao() <= populacao.get(j).getAptidao()) {
             return populacao.get(i);
         } else {
             return populacao.get(j);
