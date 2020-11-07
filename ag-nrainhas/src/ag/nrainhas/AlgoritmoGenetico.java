@@ -44,7 +44,7 @@ public class AlgoritmoGenetico {
                 custoTotalGrafo += grafo[i][j];
             }
         }
-        aptidaoMaxIndivido = custoTotalGrafo - 1;
+        aptidaoMaxIndivido = custoTotalGrafo;
     }
 
     /**
