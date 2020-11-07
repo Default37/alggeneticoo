@@ -85,8 +85,14 @@ public class Individuo {
             }
         }
         
-        if (flag == true){
+        if (flag == true && (custoTotalGrafo - aux > 1)){
+            aptidao = custoTotalGrafo - aux;
+        }
+        else if (flag == true && (custoTotalGrafo - aux <= 1)){
             aptidao = aux;
+        }
+        else if (flag == false){
+            aptidao = 0;
         }
     }
 
