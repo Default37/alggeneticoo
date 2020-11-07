@@ -67,6 +67,7 @@ public class Individuo {
         int custoTotalGrafo = 0;
         int aux = 0;
         boolean flag = true;
+        int iflag = 0;
         
         for (int i = 0; i < grafo.length; i++){
             for (int j = 0; j < grafo[i].length; j++){
@@ -80,8 +81,14 @@ public class Individuo {
                 i = getGenotipo().length - 1;
                 aptidao = 0;
                 flag = false;
-            } else {
+            } 
+            else {
                 aux += grafo[i][getGenotipo()[i]];
+            }
+        }
+        for ( int i = 0; i < getGenotipo().length - 1; i++){
+            if (getGenotipo()[i] == getGenotipo().length - 1){
+                iflag += 1;
             }
         }
         
@@ -90,6 +97,10 @@ public class Individuo {
         }
         else if (flag == true && (custoTotalGrafo - aux <= 1)){
             aptidao = aux;
+        }
+        else if (iflag == 0){
+            aptidao = 0;
+
         }
     }
 
