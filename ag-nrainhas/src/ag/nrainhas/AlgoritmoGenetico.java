@@ -156,7 +156,7 @@ public class AlgoritmoGenetico {
         ordenaPopulacao(novaPopulacao);
 
         //se a nova população for maior que a original, remove o(s) mais inapto(s)
-        while (novaPopulacao.size() > populacao.size()) {
+        while (novaPopulacao.size() < populacao.size()) {
             novaPopulacao.remove(novaPopulacao.size() - 1);
         }
 

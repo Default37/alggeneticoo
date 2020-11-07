@@ -74,19 +74,19 @@ public class Individuo {
             }
         }
         
-        for (int i = 0; i < getGenotipo().length; i++){
-            
+        for (int i = 0; i < getGenotipo().length - 1; i++){
+
             if (grafo[i][getGenotipo()[i]] == 0){
-                i = getGenotipo().length;
-                aptidao = Integer.MIN_VALUE;
+                i = getGenotipo().length - 1;
+                aptidao = 0;
                 flag = false;
             } else {
                 aux += grafo[i][getGenotipo()[i]];
             }
         }
         
-        if (flag){
-            aptidao = custoTotalGrafo - aux;
+        if (flag == true){
+            aptidao = aux;
         }
     }
 
