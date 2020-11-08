@@ -86,8 +86,8 @@ public class Individuo {
                 aux += grafo[i][getGenotipo()[i]];
             }
         }
-        for ( int i = 0; i < getGenotipo().length - 1; i++){
-            if (getGenotipo()[i] == getGenotipo().length - 1){
+        for (int i = 0; i < getGenotipo().length; i++){
+            if (getGenotipo()[i] == getGenotipo().length){
                 iflag += 1;
             }
         }
