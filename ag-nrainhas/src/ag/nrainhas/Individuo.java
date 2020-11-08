@@ -86,16 +86,16 @@ public class Individuo {
                 aux += grafo[i][getGenotipo()[i]];
             }
         }
-        for (int i = 0; i < getGenotipo().length; i++){
+        for (int i = 0; i < getGenotipo().length - 1; i++){
             if (getGenotipo()[i] == getGenotipo().length - 1){
                 iflag += 1;
             }
         }
         
-        if ((flag == true) && (custoTotalGrafo - aux > 1) && (iflag !=0)){
+        if ((flag == true) && (custoTotalGrafo - aux > 1) ){
             aptidao = custoTotalGrafo - aux;
         }
-        else if ((flag == true) && (custoTotalGrafo - aux <= 1) && (iflag != 0)){
+        else if ((flag == true) && (custoTotalGrafo - aux <= 1) ){
             aptidao = aux;
         }
         else if (iflag == 0){
