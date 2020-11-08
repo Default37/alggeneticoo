@@ -29,6 +29,9 @@ public class AgNrainhas {
         System.out.print("Taxa de mutação(0-100): ");
         int taxa = scanner.nextInt();
 
+        System.out.print("Elitismo: ");
+        int elitismo = scanner.nextInt();
+
         for (i = 0; i < ngrafo; i++) 
         {
             for (j = 0; j < ngrafo; j++)
@@ -39,7 +42,7 @@ public class AgNrainhas {
         }
 
         AlgoritmoGenetico ag = new AlgoritmoGenetico(ngrafo, npop, comp); //instancia
-        ag.executa(ngen, ncross, taxa, "torneio", 1, comp); //executa
+        ag.executa(ngen, ncross, taxa, "torneio", elitismo, comp); //executa
     }
     
 }

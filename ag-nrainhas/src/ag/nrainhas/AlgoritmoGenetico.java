@@ -98,7 +98,7 @@ public class AlgoritmoGenetico {
     public void executa(int nGeracoes, int corteCrossover, int taxaMutacao, String metodo, int elitismo, int[][] grafo) {
         int i = 0;
         while (i < nGeracoes && populacao.get(0).getAptidao() != aptidaoMaxIndivido) {
-            System.out.println("Geração " + i + "\nTamanho população: " + populacao.size() + "\nAptidão média:" + (aptidaoTotal / populacao.size()));
+            System.out.println("Geração " + i + "\nAptidão média:" + (aptidaoTotal / populacao.size()));
             System.out.println("Melhor indivíduo: ");
             populacao.get(0).exibeIndividuo(grafo);
             System.out.println("--------------------------------\n");
