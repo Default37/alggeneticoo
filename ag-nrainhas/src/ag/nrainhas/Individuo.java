@@ -92,10 +92,10 @@ public class Individuo {
             }
         }
         
-        if ((flag == true) && (custoTotalGrafo - aux > 1) ){
+        if ((flag == true) && (custoTotalGrafo - aux > 1) && (iflag != 0) ){
             aptidao = custoTotalGrafo - aux;
         }
-        else if ((flag == true) && (custoTotalGrafo - aux <= 1) ){
+        else if ((flag == true) && (custoTotalGrafo - aux <= 1)  && (iflag != 0)){
             aptidao = aux;
         }
         else if (iflag == 0){
