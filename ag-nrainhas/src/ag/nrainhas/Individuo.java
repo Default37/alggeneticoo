@@ -87,20 +87,19 @@ public class Individuo {
             }
         }
         for (int i = 0; i < getGenotipo().length; i++){
-            if (getGenotipo()[i] == getGenotipo().length){
+            if (getGenotipo()[i] == getGenotipo().length - 1){
                 iflag += 1;
             }
         }
         
-        if (flag == true && (custoTotalGrafo - aux > 1)){
+        if ((flag == true) && (custoTotalGrafo - aux > 1) && (iflag !=0)){
             aptidao = custoTotalGrafo - aux;
         }
-        else if (flag == true && (custoTotalGrafo - aux <= 1)){
+        else if ((flag == true) && (custoTotalGrafo - aux <= 1) && (iflag != 0)){
             aptidao = aux;
         }
         else if (iflag == 0){
             aptidao = 0;
-
         }
     }
 
